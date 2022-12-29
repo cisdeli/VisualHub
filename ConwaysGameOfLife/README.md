@@ -1,3 +1,3 @@
-# Filotaxia
+# Conway's Game of Life
 
-Primeiro programa em JavaScript.
+Change later to describe the project.
