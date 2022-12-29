@@ -2,7 +2,7 @@ class Cell {
   constructor(padding) {
     this.padding = padding
 
-    this.cell_size = 25
+    this.cell_size = 10
     this.cell_dead_color = '#6c1300'
     this.cell_live_color = '#ff5733'
 

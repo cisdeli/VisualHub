@@ -1,8 +1,8 @@
 class Grid {
   constructor(c_width, c_height, c_color) {
     this.padding = 50
-    this.rows = 20
-    this.columns = 20
+    this.rows = 40
+    this.columns = 40
 
     this.canvas_width = c_width
     this.canvas_height = c_height

@@ -4,8 +4,11 @@
 	*  Start game with enter - ok
 	*  Add delay/button to game generations -ok
 	*  Add generations counter - ok
-	*  Make Next Generation
-	*  Change grid name to game
+	*  Make Next Generation - ok
+	*  Change grid name to game - ok
+    *  Base implementation - ok
+    *  Add preload grids
+    *  Add auto next generation
 */
 
 let gameStart = false
