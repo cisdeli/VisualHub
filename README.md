@@ -1,2 +1,5 @@
-# MathLettersStudy
-Storing all my experiments from the book Math Letters by W.B. Schaefman
+# Welcome to VisualHub
+## About
+Storing all my experiments inspired by:
+* Math Letters book by W.B. Schaefman.
+* [Nature of Code](https://natureofcode.com/) from Daniel Shiffman
