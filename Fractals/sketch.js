@@ -39,9 +39,9 @@ class Barnsley_Fern {
     }
 }
 
-
 function setup() {
     createCanvas(700, 700);
+    // bf = new Fern(width / 2, 0, 60, "B");
     bf = new Barnsley_Fern(width / 2, 0, 60);
     bf.show(100000);
 }
