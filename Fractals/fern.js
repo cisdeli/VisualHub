@@ -112,11 +112,11 @@ class Fern extends Fractal {
             const r = Math.random();
             let t;
 
-            if (r < 0.01) {
+            if (r < this.coefficients[0].p) {
                 t = this.coefficients[0];
-            } else if (r < 0.86) {
+            } else if (r < this.coefficients[0].p + this.coefficients[1].p) {
                 t = this.coefficients[1];
-            } else if (r < 0.93) {
+            } else if (r < this.coefficients[1].p + this.coefficients[2].p) {
                 t = this.coefficients[2];
             } else {
                 t = this.coefficients[3];
@@ -125,7 +125,7 @@ class Fern extends Fractal {
             this.xi = t.a * this.x + t.b * this.y + t.e;
             this.yi = t.c * this.x + t.d * this.y + t.f;
 
-            point(this.xi * this.scaleFactor, height - this.yi * this.scaleFactor);
+            point(this.xi * this.scale, height - this.yi * this.scale);
             this.x = this.xi
             this.y = this.yi
             this.iter += 1;
