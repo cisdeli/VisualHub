@@ -104,10 +104,9 @@ class Fern extends Fractal {
         }
     }
 
-    show(maxIters) {
+    get_points(maxIters) {
+        let points = [];
         push();
-        translate(this.x, this.y);
-
         while (this.iter < maxIters) {
             const r = Math.random();
             let t;
@@ -124,13 +123,16 @@ class Fern extends Fractal {
 
             this.xi = t.a * this.x + t.b * this.y + t.e;
             this.yi = t.c * this.x + t.d * this.y + t.f;
-
-            point(this.xi * this.scale, height - this.yi * this.scale);
+            
+            points.push({x: this.xi * this.scale, y: height - this.yi * this.scale});
+            // point(this.xi * this.scale, height - this.yi * this.scale);
             this.x = this.xi
             this.y = this.yi
             this.iter += 1;
         }
         pop();
+
+        return points;
     }
 }
 

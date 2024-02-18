@@ -1,10 +1,17 @@
 function setup() {
     createCanvas(900, 700);
-    f = new Fern(width / 2, -100, 80, "CT");
-    f2 = new Fern(width / 5, -70, 60, "B");
-    f.show(100000);
-    f2.show(100000);
+    f2 = new Fern(0, 0, 60, "B");
+    points = f2.get_points(100000);
 }
 
+let i = 0; 
 function draw() {
+    translate(width / 2, 10);
+    for (let j = 0; j < 20; j++) { 
+        if (i < points.length) {
+            point(points[i].x, points[i].y);
+            i++;
+        }
+    }
 }
+
