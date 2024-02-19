@@ -1,18 +1,18 @@
-class Fractal {
-    constructor(startX, startY, scale) {
+class Fern {
+    constructor(startX, startY, scale, type) {
         this.x = startX;
         this.y = startY;
         this.scale = scale;
 
-        this.iter = 0;
         this.xi = 0.0;
         this.yi = 0.0;
-    }
-}
 
-class Fern extends Fractal {
-    constructor(startX, startY, scale, type) {
-        super(startX, startY, scale);
+        this.iter = 0;
+        this.maxIters = 100000;
+        this.done = false;
+
+        this.points = [];
+
         if (type === "B") {
             this.coefficients = [
                 {
@@ -104,35 +104,44 @@ class Fern extends Fractal {
         }
     }
 
-    get_points(maxIters) {
-        let points = [];
+    get_points(n) {
         push();
-        while (this.iter < maxIters) {
-            const r = Math.random();
-            let t;
+        for (let i = 0; i < n; i++) { // Draw only 20 points per iteration
+            if (this.iter < this.maxIters) {
+                const r = Math.random();
+                let t;
 
-            if (r < this.coefficients[0].p) {
-                t = this.coefficients[0];
-            } else if (r < this.coefficients[0].p + this.coefficients[1].p) {
-                t = this.coefficients[1];
-            } else if (r < this.coefficients[1].p + this.coefficients[2].p) {
-                t = this.coefficients[2];
+                if (r < this.coefficients[0].p) {
+                    t = this.coefficients[0];
+                } else if (r < this.coefficients[0].p + this.coefficients[1].p) {
+                    t = this.coefficients[1];
+                } else if (r < this.coefficients[1].p + this.coefficients[2].p) {
+                    t = this.coefficients[2];
+                } else {
+                    t = this.coefficients[3];
+                }
+
+                this.xi = t.a * this.x + t.b * this.y + t.e;
+                this.yi = t.c * this.x + t.d * this.y + t.f;
+
+                this.points.push({ x: this.xi * this.scale, y: height - this.yi * this.scale });
+                this.x = this.xi
+                this.y = this.yi
+                this.iter += 1;
             } else {
-                t = this.coefficients[3];
+                this.done = true;
+                break;
             }
-
-            this.xi = t.a * this.x + t.b * this.y + t.e;
-            this.yi = t.c * this.x + t.d * this.y + t.f;
-            
-            points.push({x: this.xi * this.scale, y: height - this.yi * this.scale});
-            // point(this.xi * this.scale, height - this.yi * this.scale);
-            this.x = this.xi
-            this.y = this.yi
-            this.iter += 1;
         }
         pop();
+    }
 
-        return points;
+    show() {
+        translate(width / 2, 10);
+        stroke(255);
+        for (let i = 0; i < this.points.length; i++) {
+            point(this.points[i].x, this.points[i].y);
+        }
     }
 }
 
