@@ -1,10 +1,8 @@
 class dragonCurve {
-    constructor() {
+    constructor(generations) {
         this.angle = HALF_PI;
         this.axiom = "FX";
         this.sentence = this.axiom;
-        this.len = 200;
-        this.generation = 0;
 
         this.rules = [
             {
@@ -16,10 +14,17 @@ class dragonCurve {
                 b: "FX-Y"
             }
         ];
+
+
+        this.currentSegment = 0;
+        this.scaleFactor = 0.992;
+        this.zoomOutIndex = 0;
+        this.generation = generations;
+        for (let i = 0; i < generations; i++)
+            this.generate();
     }
 
     generate() {
-        this.generation++;
         let nextSentence = "";
         for (let i = 0; i < this.sentence.length; i++) {
             let current = this.sentence.charAt(i);
@@ -33,26 +38,29 @@ class dragonCurve {
             nextSentence += replace;
         }
         this.sentence = nextSentence;
+        return this.sentence;
     }
 
-    show() {
+    show(num_segments) {
         resetMatrix();
-        translate(width / 2, height / 2);
-        stroke(255);
+        translate(width / 2, height / 3);
         colorMode(HSB);
-        this.len = width / 4 * pow(0.75, this.generation);
-        for (let i = 0; i < this.sentence.length; i++) {
+
+        let len = width / 10 * pow(this.scaleFactor, this.zoomOutIndex);
+        for (let i = 0; i <= this.currentSegment; i++) {
             stroke(360 * (i / this.sentence.length), 100, 100);
             let current = this.sentence.charAt(i);
 
             if (current == "F") {
-                line(0, 0, 0, -this.len);
-                translate(0, -this.len);
+                line(0, 0, 0, -len);
+                translate(0, -len);
             } else if (current == "+") {
                 rotate(this.angle);
             } else if (current == "-") {
                 rotate(-this.angle);
             }
         }
+        this.zoomOutIndex += 1.2;
+        this.currentSegment += num_segments;
     }
 }
